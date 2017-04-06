@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2969ee47263a62345b04d0e60853a8fe
+timeCreated: 1491518061
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ravenwood
+  fontNames:
+  - Ravenwood
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

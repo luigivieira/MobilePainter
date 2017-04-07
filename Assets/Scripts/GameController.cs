@@ -35,8 +35,6 @@ public class GameController: MonoBehaviour
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         dialog = Dialog.instance();
-        Debug.Log("Oi");
-        Debug.Log(dialog);
         confirmExit = new UnityAction(quit);
         ignoreExit = new UnityAction(ignore);
     }

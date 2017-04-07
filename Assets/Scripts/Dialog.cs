@@ -7,7 +7,7 @@ using UnityEngine.Events;
 /// <summary>
 /// Singleton que implementa o acesso aos diálogos de interação com o usuário.
 /// </summary>
-public class Dialog : MonoBehaviour
+public class Dialog: MonoBehaviour
 {
     /// <summary>
     /// Objeto do diálogo na UI.

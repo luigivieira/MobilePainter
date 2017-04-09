@@ -12,14 +12,14 @@ public class Brushes: AbstractMenu
     /// Lista com os nomes dos brushes válidos.
     /// </summary>
     private List<string> buttons = new List<string>(new string[] {
-            "plus", "vertical", "horizontal", "circle", "gradient"
+            "dot", "circle", "gradient", "plus", "vertical", "horizontal", "star", "heart"
     });
 
     /// <summary>
     /// Devolve a lista de brushes válidos.
     /// </summary>
     /// <returns>Lista de strings com os nomes dos brushes válidos neste menu.</returns>
-    protected override List<string> validButtons()
+    public override List<string> validButtons()
     {
         return buttons;
     }

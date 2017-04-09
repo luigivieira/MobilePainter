@@ -1,14 +1,17 @@
 fileFormatVersion: 2
-guid: fa0eab45f1dd4ec4d89ad5b1d1f86cb7
-timeCreated: 1491691412
+guid: 4b5eb81e32f4ab24ca6cd5529362251f
+timeCreated: 1491709939
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: masks_0
-    21300002: masks_1
-    21300004: masks_2
-    21300006: masks_3
-    21300008: masks_4
+    21300000: masks-paintbrush_0
+    21300002: masks-paintbrush_1
+    21300004: masks-paintbrush_2
+    21300006: masks-paintbrush_3
+    21300008: masks-paintbrush_4
+    21300010: masks-paintbrush_5
+    21300012: masks-paintbrush_6
+    21300014: masks-paintbrush_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -83,7 +86,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: masks_0
+      name: masks-paintbrush_0
       rect:
         serializedVersion: 2
         x: 0
@@ -96,7 +99,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: masks_1
+      name: masks-paintbrush_1
       rect:
         serializedVersion: 2
         x: 240
@@ -109,7 +112,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: masks_2
+      name: masks-paintbrush_2
       rect:
         serializedVersion: 2
         x: 480
@@ -122,7 +125,20 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: masks_3
+      name: masks-paintbrush_3
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 240
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: masks-paintbrush_4
       rect:
         serializedVersion: 2
         x: 0
@@ -135,10 +151,36 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: masks_4
+      name: masks-paintbrush_5
       rect:
         serializedVersion: 2
         x: 240
+        y: 0
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: masks-paintbrush_6
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 240
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: masks-paintbrush_7
+      rect:
+        serializedVersion: 2
+        x: 720
         y: 0
         width: 240
         height: 240

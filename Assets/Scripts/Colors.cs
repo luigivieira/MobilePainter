@@ -19,7 +19,7 @@ public class Colors: AbstractMenu
     /// Devolve a lista de cores válidas.
     /// </summary>
     /// <returns>Lista de strings com os nomes das cores válidas neste menu.</returns>
-    protected override List<string> validButtons()
+    public override List<string> validButtons()
     {
         return buttons;
     }

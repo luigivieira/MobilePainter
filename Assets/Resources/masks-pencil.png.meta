@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 26f6bad1ae462a6488ac8e182aa16bc8
-timeCreated: 1491710760
+guid: f8d877b351e20fc418592f1a22c5f31e
+timeCreated: 1491709951
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: brushes_0
-    21300002: brushes_1
-    21300004: brushes_2
-    21300006: brushes_3
-    21300008: brushes_4
-    21300010: brushes_5
-    21300012: brushes_6
-    21300014: brushes_7
+    21300000: masks-pencil_0
+    21300002: masks-pencil_1
+    21300004: masks-pencil_2
+    21300006: masks-pencil_3
+    21300008: masks-pencil_4
+    21300010: masks-pencil_5
+    21300012: masks-pencil_6
+    21300014: masks-pencil_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -86,7 +86,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: brushes_0
+      name: masks-pencil_0
       rect:
         serializedVersion: 2
         x: 0
@@ -99,7 +99,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: brushes_1
+      name: masks-pencil_1
       rect:
         serializedVersion: 2
         x: 240
@@ -112,7 +112,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: brushes_2
+      name: masks-pencil_2
       rect:
         serializedVersion: 2
         x: 480
@@ -125,7 +125,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: brushes_3
+      name: masks-pencil_3
       rect:
         serializedVersion: 2
         x: 720
@@ -138,7 +138,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: brushes_4
+      name: masks-pencil_4
       rect:
         serializedVersion: 2
         x: 0
@@ -151,7 +151,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: brushes_5
+      name: masks-pencil_5
       rect:
         serializedVersion: 2
         x: 240
@@ -164,7 +164,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: brushes_6
+      name: masks-pencil_6
       rect:
         serializedVersion: 2
         x: 480
@@ -177,7 +177,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: brushes_7
+      name: masks-pencil_7
       rect:
         serializedVersion: 2
         x: 720

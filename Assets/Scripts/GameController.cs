@@ -55,6 +55,10 @@ public class GameController: MonoBehaviour
     public void toggleInfo()
     {
         infoPanel.SetActive(!infoPanel.activeSelf);
+
+        // Desabilita o desenho enquanto a janela de informações estiver sendo exibida
+        Drawing drawing = GetComponent<Drawing>();
+        drawing.enabled = !infoPanel.activeSelf;
     }
 
     /// <summary>

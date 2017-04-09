@@ -19,7 +19,7 @@ public class Tools: AbstractMenu
     /// Devolve a lista de ferramentas válidas.
     /// </summary>
     /// <returns>Lista de strings com os nomes das ferramentas válidas neste menu.</returns>
-    protected override List<string> validButtons()
+    public override List<string> validButtons()
     {
         return buttons;
     }

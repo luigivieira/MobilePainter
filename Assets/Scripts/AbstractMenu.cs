@@ -31,12 +31,20 @@ abstract public class AbstractMenu: MonoBehaviour
     protected string selectedButton;
 
     /// <summary>
+    /// Propriedade de acesso ao botão selecionado.
+    /// </summary>
+    public string selected
+    {
+        get { return selectedButton; }
+    }
+
+    /// <summary>
     /// Método abstrato que devolve a lista de botões válidos (isto é, esperados por este menu).
     /// Este método deve ser implementado pelas classes filhas.
     /// </summary>
     /// <returns>Lista de strings com os nomes dos botões válidos neste menu.
     /// Obsevação: os nomes devem ser utilizados sempre em minúsculas.</returns>
-    protected abstract List<string> validButtons();
+    public abstract List<string> validButtons();
 
     /// <summary>
     /// Inicialização do menu.
@@ -44,6 +52,7 @@ abstract public class AbstractMenu: MonoBehaviour
     protected void Awake()
     {
         activateButton.GetComponent<Image>().sprite = buttonSprites[0];
+        selectedButton = validButtons()[0];
     }
 
     /// <summary>
@@ -72,6 +81,11 @@ abstract public class AbstractMenu: MonoBehaviour
     /// </summary>
     public void openMenu()
     {
+        // Desabilita o desenho enquanto o menu estiver aberto
+        Drawing drawing = GetComponent<Drawing>();
+        drawing.enabled = false;
+
+        // Exibe o menu
         menuPanel.SetActive(true);
     }
 
@@ -80,6 +94,11 @@ abstract public class AbstractMenu: MonoBehaviour
     /// </summary>
     public void closeMenu()
     {
+        // Esconde o menu
         menuPanel.SetActive(false);
+
+        // Reabilita o desenho
+        Drawing drawing = GetComponent<Drawing>();
+        drawing.enabled = true;
     }
 }

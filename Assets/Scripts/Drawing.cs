@@ -8,6 +8,18 @@ using UnityEngine.UI;
 /// </summary>
 public class Drawing: MonoBehaviour
 {
+    public Texture baseTexture;
+
+    /// <summary>
+    /// Textura dinâmica (render texture) usada com a render câmera para simular o desenho.
+    /// </summary>
+    public RenderTexture dynamicTexture;
+
+    /// <summary>
+    /// Material-base usado para a área na frente da câmera de renderização (e atrás das máscaras de desenho criadas).
+    /// </summary>
+    public Material baseMaterial;
+
     /// <summary>
     /// Sprite com o cursor para identificação de onde será desenhado.
     /// Só é apresentado quando executando no editor ou em outra plataforma
@@ -46,17 +58,47 @@ public class Drawing: MonoBehaviour
     /// </summary>
     private Sprite[] masksPaintbrush;
 
-    private float lastZ;
+    /// <summary>
+    /// Salva o valor da última coordenada em Z de uma nova máscara adicionada.
+    /// Isto é usado para garantir que um novo desenho esteja sempre à frente de todos os
+    /// demais já realizados.
+    /// </summary>
+    private float lastZ = 0.9999f;
+
+    /// <summary>
+    /// Valor de decremento no eixo Z para uma nova máscara adicionada.
+    /// Isto é usado para garantir que um novo desenho esteja sempre à frente de todos os
+    /// demais já realizados;
+    /// </summary>
+    private float zStep = -0.0001f;
+
+    /// <summary>
+    /// Número máximo de máscaras que são adicionadas durante o desenho antes de que a textura
+    /// seja "baked" (as máscaras são todas unidas em uma só textura). Como esse processamento
+    /// é computacionalmente custoso, ele não é realizado a cada desenho; mas precisa ser feito
+    /// com regularidade para evitar que o número de objetos instanciados cresça absurdamente
+    /// (o que deixaria a execução progressivamente mais lenta).
+    /// </summary>
+    private int maxMasks = 1000;
+
+    /// <summary>
+    /// Flag indicativo da realização do "baking" de textura das máscaras (enquanto o baking
+    /// ocorre, o desenho não é realizado).
+    /// </summary>
+    private bool isBaking;
 
     /// <summary>
     /// Inicialização da classe.
     /// </summary>
     void Start()
     {
+        // Garante que a área desenhável sempre começa com a textura base (totalmente branca)
+        baseMaterial.mainTexture = baseTexture;
+
         basePos = brushContainer.transform.position;
         isDrawing = false;
+        isBaking = false;
         cursor.SetActive(false);
-        lastZ = 0.001f;
 
         // Carrega as máscaras para as duas ferramentas
         masksPencil = Resources.LoadAll<Sprite>(@"masks-pencil");
@@ -95,13 +137,15 @@ public class Drawing: MonoBehaviour
 
         // Verifica se o mouse/dedo está sobre a área desenhável
         Vector3 pos;
-        if(HitTestDrawableArea(out pos))
+        if(!isBaking && HitTestDrawableArea(out pos))
         {
             // Exibe o cursor (apenas em plataformas não móveis)
             if(!isMobile)
             {
                 cursor.SetActive(true);
-                cursor.transform.position = pos + basePos;
+                Vector3 curPos = pos + basePos;
+                curPos.z = -6.5f;
+                cursor.transform.position = curPos;
             }
 
             // Desenha!
@@ -126,7 +170,7 @@ public class Drawing: MonoBehaviour
         if (!buildMask(out sprite, out color))
             return;
 
-        pos.z = lastZ - 0.001f;
+        pos.z = lastZ + zStep;
 
         // Cria o objeto da máscara e adiciona-o em frente à textura dinâmica
         GameObject mask = new GameObject();
@@ -141,6 +185,18 @@ public class Drawing: MonoBehaviour
         rend.color = color;
 
         lastZ = pos.z;
+
+        // Verifica se chegou o momento de fazer o "bake" da textura;
+        // Se chegou, une todas as máscaras existentes em uma só e deleta os demais objetos
+        if(brushContainer.transform.childCount > maxMasks)
+        {
+            // Esconde o cursor (para que ele não seja incluído na textura produzida)
+            cursor.SetActive(false);
+
+            // Indica que o "bake" está em progresso e chama-o assincronamente (em 100 milisegundos)
+            isBaking = true;
+            Invoke("bakeMasksTexture", 0.1f);
+        }
     }
 
     /// <summary>
@@ -220,12 +276,33 @@ public class Drawing: MonoBehaviour
             }
         }
 
-        // Se a ferramenta selecionada é o pincel, aplica um filtro Gaussiano à máscara        
-        if (tools.selected == "paintbrush")
-        {
-            // TODO
-        }
-
         return true; 
+    }
+
+    /// <summary>
+    /// Realiza o "bake" da textura. Isto é, cria uma nova textura de base (para o objeto
+    /// na frente da câmera de renderização) com base no que está sendo "visto" por essa câmera,
+    /// e então deleta as instâncias das máscaras utilizadas para simular o desenho.
+    /// </summary>
+    private void bakeMasksTexture()
+    {
+        // Cria uma nova textura o que está sendo exibido na área de renderização
+        // (que contém a combinação de todas as máscaras de desenho posicionadas)
+        RenderTexture.active = dynamicTexture;
+        Texture2D tex = new Texture2D(dynamicTexture.width, dynamicTexture.height, TextureFormat.RGB24, false);
+        tex.ReadPixels(new Rect(0, 0, dynamicTexture.width, dynamicTexture.height), 0, 0);
+        tex.Apply();
+        RenderTexture.active = null;
+
+        // Define a textura criada como base para o objeto na frente da câmera de renderização
+        baseMaterial.mainTexture = tex;
+
+        // Destroy todos os objetos de máscaras existentes (já que a partir de então eles
+        // são desnecessários)
+        foreach (Transform child in brushContainer.transform)
+            Destroy(child.gameObject);
+
+        // Indica que o processo de baking terminou
+        isBaking = false;
     }
 }
